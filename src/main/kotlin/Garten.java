@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Garten
 {
-    private Feld[][][] garten;
+    public Feld[][][] garten;
     private Akasha[] akashas=new Akasha[4];
     public Garten(int a, int b, int c)
     {
