@@ -7,4 +7,7 @@ class Feld
     var anzahlKristalle:Int=0
     //über 5.5 und ab 0.5 und weniger ist schlecht fürs Wachstum, zwischen 2 und 4 ist optimal. Zu jeder Tageszeit verringert sich der Wert um 0.5.
     var feuchtigkeit: Double=0.0
+    //zählt Globuli mit denen gedüngt wurde. Ab 20 erleidet die Pflanze einen Käferbefall, alle angrenzenden Pflanzen werden ebenfalls befallen.
+    var globuli: Int=0
+    var befallen=false
 }
