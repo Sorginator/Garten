@@ -1,5 +1,5 @@
 import java.lang.reflect.Field
-import kot lin.collections.arrayListOf
+import kotlin.collections.arrayListOf
 import kotlin.Array
 
 //this is main, it will organize all the shit
