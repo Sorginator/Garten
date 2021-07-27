@@ -139,7 +139,7 @@ fun decide(input:String)
 
                             if(f.befallen) print("Dank der Globukalypse die du hier veranstaltet hast ist die Pflanze jetzt von Schädlingen befallen.")
 
-                            if (f.anzahlKristalle>=4 && f.pflanze==Double.NaN) print("Die Pflanze weist eine Art Sonnenbrand auf.")
+                            if (f.anzahlKristalle>=4 && f.pflanze!=Double.NaN) print("Die Pflanze weist eine Art Sonnenbrand auf.")
                         }
                         else throw Exception()
                     }catch(e:Exception){
