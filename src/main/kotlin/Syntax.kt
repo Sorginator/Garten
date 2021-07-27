@@ -1,9 +1,11 @@
 
 sealed class Expression {
     data class Var(val name: String): Expression()
-    data class gartenErstellen(val größeX: Integer, val größeY: Integer): Expression()
-    data class gartenErweitern(val erweiterungX: Integer, val erweiterungY: Integer): Expression()
-    data class gartenVerkleinern(val verringernX: Integer, val verringernY: Integer): Expression()
+    //he doesn't like Integer yo. We're doing Kotlin if you need nullable do ? instead.
+    data class gartenErstellen(val größeX: Int, val größeY: Int, val größeZ: Int): Expression()
+    data class gartenErweitern(val x: Int, val y: Int, val z: Int): Expression()
+    data class gartenVerkleinern(val x: Int, val y: Int, val z: Int): Expression()
+    //was zum fick ist nummer???
     data class pflanzen(val positionX: Integer, val positionY: Integer, val nummer: Integer): Expression()
     data class ernten(val positionX: Integer, val positionY: Integer): Expression()
     data class bewässern(val positionX: Integer, val positionY: Integer, val wasserVariante: Wasser = Wasser.Normal): Expression()
