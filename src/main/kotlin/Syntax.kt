@@ -7,11 +7,12 @@ sealed class Expression {
     data class gartenVerkleinern(val x: Int, val y: Int, val z: Int): Expression()
     //was zum fick ist nummer???
     data class pflanzen(val positionX: Integer, val positionY: Integer, val nummer: Integer): Expression()
-    data class ernten(val positionX: Integer, val positionY: Integer): Expression()
-    data class bewässern(val positionX: Integer, val positionY: Integer, val wasserVariante: Wasser = Wasser.Normal): Expression()
+    data class ernten(val positionX: Int, val positionY: Int, val posZ:Int): Expression()
+    data class bewässern(val x: Int, val y: Int, val z: Int, val wasserVariante: Wasser = Wasser.Normal): Expression()
     data class beschneiden(val positionX: Integer, val positionY: Integer): Expression()
     data class düngen(val positionX: Integer, val positionY: Integer, val düngerVariante: Dünger = Dünger.Standart)
     data class auspendeln(val pendelVariante: String = "Standart"): Expression()
+    data class nothing(val why:String) : Expression()
 }
 
 enum class Dünger {
