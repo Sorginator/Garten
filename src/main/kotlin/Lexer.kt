@@ -1,11 +1,15 @@
 
 
 fun readCode(inputString: String) {
+    var zeilenWeiseTrennung = inputString.split("\n")
+    zeilenWeiseTrennung.forEach(
+
+    )
 
 }
 
-fun getExpression(potentialExpression: String): Expression {
-    when(potentialExpression) {
+fun getExpression(potentialExpression: Array<String>): Expression {
+    when(potentialExpression[0]) {
         "gartenErstellen" -> TODO()
         "gartenErweitern" -> TODO()
         "gartenVerkleinern" -> TODO()
