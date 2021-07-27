@@ -116,7 +116,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 1-> {
                     try {
                         var x = c[0].toInt()
-                        return Expression.pflanzen(x,1,1)
+                        return Expression.pflanzen(x,0,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -125,7 +125,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        return Expression.pflanzen(x,y,1)
+                        return Expression.pflanzen(x,y,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -148,7 +148,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 1-> {
                     try {
                         var x = c[0].toInt()
-                        return Expression.ernten(x,1,1)
+                        return Expression.ernten(x,0,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -157,7 +157,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        return Expression.ernten(x,y,1)
+                        return Expression.ernten(x,y,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -180,7 +180,14 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 1-> {
                     try {
                         var x = c[0].toInt()
-                        return Expression.bewässern(x,1,1)
+                        var w:Wasser=Wasser.Normal
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Normal") w=Wasser.Normal
+                            else if (potentialExpression[2]=="Hexagonal") w=Wasser.Hexagonal
+                            else throw Exception()
+                        }
+                        return Expression.bewässern(x,0,0, w)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -189,63 +196,29 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        return Expression.bewässern(x,y,1)
+                        var w:Wasser=Wasser.Normal
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Normal") w=Wasser.Normal
+                            else if (potentialExpression[2]=="Hexagonal") w=Wasser.Hexagonal
+                            else throw Exception()
+                        }
+                        return Expression.bewässern(x,y,0, w)
                     }catch(e:Exception){
-                        try {
-                            var x = c[0].toInt()
-                            var w:Wasser
-                            when(c[1]){
-                                "Normal" -> w =Wasser.Normal
-                                "Hexagonal" -> w=Wasser.Hexagonal
-                                else -> {
-                                    w=Wasser.Normal
-                                    throw Exception()
-                                }
-                            }
-                            return Expression.bewässern(x,1,1, w)
-                        }catch(e:Exception){
                         return nothing
-                    }
                     }
                 }
                 3-> {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        var z = c[2].toInt()
-                        return Expression.bewässern(x,y,z)
-                    }catch(e:Exception){
-                        try {
-                            var x = c[0].toInt()
-                            var y = c[1].toInt()
-                            var w:Wasser
-                            when(c[2]){
-                                "Normal" -> w =Wasser.Normal
-                                "Hexagonal" -> w=Wasser.Hexagonal
-                                else -> {
-                                    w=Wasser.Normal
-                                    throw Exception()
-                                }
-                            }
-                            return Expression.bewässern(x,y,1, w)
-                        }catch(e:Exception){
-                            return nothing
-                        }
-                    }
-                }
-                4-> {
-                    try {
-                        var x = c[0].toInt()
-                        var y = c[1].toInt()
-                        var z = c[2].toInt()
-                        var w:Wasser
-                        when(c[3]){
-                            "Normal" -> w =Wasser.Normal
-                            "Hexagonal" -> w=Wasser.Hexagonal
-                            else -> {
-                                w=Wasser.Normal
-                                throw Exception()
-                            }
+                        var z = c[1].toInt()
+                        var w:Wasser=Wasser.Normal
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Normal") w=Wasser.Normal
+                            else if (potentialExpression[2]=="Hexagonal") w=Wasser.Hexagonal
+                            else throw Exception()
                         }
                         return Expression.bewässern(x,y,z, w)
                     }catch(e:Exception){
@@ -260,7 +233,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 1-> {
                     try {
                         var x = c[0].toInt()
-                        return Expression.beschneiden(x,1,1)
+                        return Expression.beschneiden(x,0,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -269,7 +242,7 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        return Expression.beschneiden(x,y,1)
+                        return Expression.beschneiden(x,y,0)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -292,7 +265,14 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 1-> {
                     try {
                         var x = c[0].toInt()
-                        return Expression.düngen(x,1,1)
+                        var d:Dünger=Dünger.Standart
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Standart") d=Dünger.Standart
+                            else if (potentialExpression[2]=="Globuli") d=Dünger.Globuli
+                            else throw Exception()
+                        }
+                        return Expression.düngen(x,0,0, d)
                     }catch(e:Exception){
                         return nothing
                     }
@@ -301,63 +281,29 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        return Expression.düngen(x,y,1)
-                    }catch(e:Exception){
-                        try {
-                            var x = c[0].toInt()
-                            var d:Dünger
-                            when(c[1]){
-                                "Standard" -> d =Dünger.Standart
-                                "Globuli" -> d=Dünger.Globuli
-                                else -> {
-                                    d=Dünger.Standart
-                                    throw Exception()
-                                }
-                            }
-                            return Expression.düngen(x,1,1, d)
-                        }catch(e:Exception){
-                            return nothing
+                        var d:Dünger=Dünger.Standart
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Standart") d=Dünger.Standart
+                            else if (potentialExpression[2]=="Globuli") d=Dünger.Globuli
+                            else throw Exception()
                         }
+                        return Expression.düngen(x,y,0, d)
+                    }catch(e:Exception){
+                        return nothing
                     }
                 }
                 3-> {
                     try {
                         var x = c[0].toInt()
                         var y = c[1].toInt()
-                        var z = c[2].toInt()
-                        return Expression.düngen(x,y,z)
-                    }catch(e:Exception){
-                        try {
-                            var x = c[0].toInt()
-                            var y = c[1].toInt()
-                            var d:Dünger
-                            when(c[2]){
-                                "Standard" -> d =Dünger.Standart
-                                "Globuli" -> d=Dünger.Globuli
-                                else -> {
-                                    d=Dünger.Standart
-                                    throw Exception()
-                                }
-                            }
-                            return Expression.düngen(x,y,1, d)
-                        }catch(e:Exception){
-                            return nothing
-                        }
-                    }
-                }
-                4-> {
-                    try {
-                        var x = c[0].toInt()
-                        var y = c[1].toInt()
-                        var z = c[2].toInt()
-                        var d:Dünger
-                        when(c[3]){
-                            "Standard" -> d =Dünger.Standart
-                            "Globuli" -> d=Dünger.Globuli
-                            else -> {
-                                d=Dünger.Standart
-                                throw Exception()
-                            }
+                        var z = c[1].toInt()
+                        var d:Dünger=Dünger.Standart
+                        if(potentialExpression.size==3)
+                        {
+                            if (potentialExpression[2]=="Standart") d=Dünger.Standart
+                            else if (potentialExpression[2]=="Globuli") d=Dünger.Globuli
+                            else throw Exception()
                         }
                         return Expression.düngen(x,y,z, d)
                     }catch(e:Exception){

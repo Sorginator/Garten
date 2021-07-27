@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Garten
+class Garden
 {
     public Feld[][][] garten;
     private Akasha[] akashas=new Akasha[4];
-    public Garten(int a, int b, int c)
+    public Garden(int a, int b, int c)
     {
         garten=new Feld[a][b][c];
     }
