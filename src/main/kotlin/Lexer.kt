@@ -1,10 +1,13 @@
 
 
-fun readCode(inputString: String) {
+fun readCode(inputString: String) : ArrayList<Array<String>>
+{
     var zeilenWeiseTrennung = inputString.split("\n")
-    zeilenWeiseTrennung.forEach(
-
-    )
+    var out= arrayListOf<Array<String>>()
+    zeilenWeiseTrennung.forEach{
+        out.add(it.split(" ").toTypedArray())
+    }
+    return out
 
 }
 
@@ -107,7 +110,38 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 }
             }
         }
-        "pflanzen" -> TODO()
+        "pflanzen" -> {
+            var c = potentialExpression[1].split("x")
+            when(c.size){
+                1-> {
+                    try {
+                        var x = c[0].toInt()
+                        return Expression.pflanzen(x,1,1)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+                2-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        return Expression.pflanzen(x,y,1)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+                3-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        var z = c[2].toInt()
+                        return Expression.pflanzen(x,y,z)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+            }
+        }
         "ernten" -> {
             var c = potentialExpression[1].split("x")
             when(c.size){
@@ -220,10 +254,121 @@ fun getExpression(potentialExpression: Array<String>): Expression {
                 }
             }
         }
-        "beschneiden" -> TODO()
-        "düngen" -> TODO()
-        "auspendeln" -> TODO()
-        "var" -> TODO()
-        else -> null
+        "beschneiden" ->  {
+            var c = potentialExpression[1].split("x")
+            when(c.size){
+                1-> {
+                    try {
+                        var x = c[0].toInt()
+                        return Expression.beschneiden(x,1,1)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+                2-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        return Expression.beschneiden(x,y,1)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+                3-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        var z = c[2].toInt()
+                        return Expression.beschneiden(x,y,z)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+            }
+        }
+        "düngen" -> {
+            var c = potentialExpression[1].split("x")
+            when(c.size){
+                1-> {
+                    try {
+                        var x = c[0].toInt()
+                        return Expression.düngen(x,1,1)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+                2-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        return Expression.düngen(x,y,1)
+                    }catch(e:Exception){
+                        try {
+                            var x = c[0].toInt()
+                            var d:Dünger
+                            when(c[1]){
+                                "Standard" -> d =Dünger.Standart
+                                "Globuli" -> d=Dünger.Globuli
+                                else -> {
+                                    d=Dünger.Standart
+                                    throw Exception()
+                                }
+                            }
+                            return Expression.düngen(x,1,1, d)
+                        }catch(e:Exception){
+                            return nothing
+                        }
+                    }
+                }
+                3-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        var z = c[2].toInt()
+                        return Expression.düngen(x,y,z)
+                    }catch(e:Exception){
+                        try {
+                            var x = c[0].toInt()
+                            var y = c[1].toInt()
+                            var d:Dünger
+                            when(c[2]){
+                                "Standard" -> d =Dünger.Standart
+                                "Globuli" -> d=Dünger.Globuli
+                                else -> {
+                                    d=Dünger.Standart
+                                    throw Exception()
+                                }
+                            }
+                            return Expression.düngen(x,y,1, d)
+                        }catch(e:Exception){
+                            return nothing
+                        }
+                    }
+                }
+                4-> {
+                    try {
+                        var x = c[0].toInt()
+                        var y = c[1].toInt()
+                        var z = c[2].toInt()
+                        var d:Dünger
+                        when(c[3]){
+                            "Standard" -> d =Dünger.Standart
+                            "Globuli" -> d=Dünger.Globuli
+                            else -> {
+                                d=Dünger.Standart
+                                throw Exception()
+                            }
+                        }
+                        return Expression.düngen(x,y,z, d)
+                    }catch(e:Exception){
+                        return nothing
+                    }
+                }
+            }
+        }
+        "auspendeln" -> return Expression.auspendeln()
+        "var" -> return nothing
+        else -> return nothing
     }
+    return nothing
 }
