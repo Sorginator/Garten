@@ -4,7 +4,7 @@ fun readCode(inputString: String) {
 
 }
 
-fun getExpression(potentialExpression: String) {
+fun getExpression(potentialExpression: String): Expression {
     when(potentialExpression) {
         "gartenErstellen" -> TODO()
         "gartenErweitern" -> TODO()
