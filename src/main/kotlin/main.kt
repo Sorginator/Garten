@@ -1,4 +1,4 @@
-import java.lang.reflect.Field
+import java.lang.RuntimeException
 import kotlin.collections.arrayListOf
 import kotlin.Array
 
@@ -54,8 +54,9 @@ fun decide(input:String)
                 "einsetzen"->{
                     try {
                         var c=convertCoords(words[2])
-                        var a:Double=g()[c[0]][c[1]][c[2]].pflanze
-                        if(a!=Double.NaN) g()[c[0]][c[1]][c[2]].pflanze=0.0
+                        //var a:Double=aktuellerGarten()[c[0]][c[1]][c[2]].pflanze
+                        var a:Double=aktuellerGarten().garten[c[0]][c[1]][c[0]].pflanze
+                        if(a!=Double.NaN) aktuellerGarten().garten[c[0]][c[1]][c[2]].pflanze=0.0
                         else
                         {
                             print("Bereits bepflanzt.")
@@ -67,9 +68,9 @@ fun decide(input:String)
                 }
                 "ernten"->{try {
                     var c=convertCoords(words[2])
-                    var a:Double=g()[c[0]][c[1]][c[2]].pflanze
+                    var a:Double=aktuellerGarten().garten[c[0]][c[1]][c[2]].pflanze
                     if(a!=Double.NaN) {
-                        g()[c[0]][c[1]][c[2]].pflanze=Double.NaN
+                        aktuellerGarten().garten[c[0]][c[1]][c[2]].pflanze=Double.NaN
                         if(a<5.0) print("Zu früh. Kein Ertrag.")
                         else print("Erfoglreiche Ernte!")
                     }
@@ -80,7 +81,7 @@ fun decide(input:String)
                 "waessern"->{try {
                     var c=convertCoords(words[2])
                     if(c!=null) {
-                        g()[c[0]][c[1]][c[2]].feuchtigkeit+=2.0
+                        aktuellerGarten().garten[c[0]][c[1]][c[2]].feuchtigkeit+=2.0
                     }
                     else throw Exception()
                 }catch(e:Exception){
@@ -89,7 +90,7 @@ fun decide(input:String)
                 "duengen"->{try {
                     var c=convertCoords(words[2])
                     if(c!=null) {
-                        g()[c[0]][c[1]][c[2]].globuli+=1
+                        aktuellerGarten().garten[c[0]][c[1]][c[2]].globuli+=1
                     }
                     else throw Exception()
                 }catch(e:Exception){
@@ -101,7 +102,7 @@ fun decide(input:String)
                         try {
                             var c=convertCoords(words[3])
                             if(c!=null) {
-                                g()[c[0]][c[1]][c[2]].anzahlKristalle+=1
+                                aktuellerGarten().garten[c[0]][c[1]][c[2]].anzahlKristalle+=1
                             }
                             else throw Exception()
                         }catch(e:Exception){
@@ -112,7 +113,7 @@ fun decide(input:String)
                         try {
                             var c=convertCoords(words[3])
                             if(c!=null) {
-                                g()[c[0]][c[1]][c[2]].anzahlKristalle-=1
+                                aktuellerGarten().garten[c[0]][c[1]][c[2]].anzahlKristalle-=1
                             }
                             else throw Exception()
                         }catch(e:Exception){
@@ -125,7 +126,7 @@ fun decide(input:String)
                     try {
                         var c=convertCoords(words[2])
                         if(c!=null) {
-                            var f=g()[c[0]][c[1]][c[2]]
+                            var f=aktuellerGarten().garten[c[0]][c[1]][c[2]]
                             if(f.pflanze==Double.NaN)print("Das Feld liegt brach.")
                             else if (f.pflanze<5.0)print("Die Pflanze wächst vor sich hin.")
                             else print("Die Pflanze ist bereit zum ernten.")
@@ -138,7 +139,7 @@ fun decide(input:String)
 
                             if(f.befallen) print("Dank der Globukalypse die du hier veranstaltet hast ist die Pflanze jetzt von Schädlingen befallen.")
 
-                            if (f.anzahlKristalle>=4&&!f.pflanze==Double.NaN) print("Die Pflanze weist eine Art Sonnenbrand auf.")
+                            if (f.anzahlKristalle>=4 && f.pflanze==Double.NaN) print("Die Pflanze weist eine Art Sonnenbrand auf.")
                         }
                         else throw Exception()
                     }catch(e:Exception){
@@ -163,12 +164,14 @@ fun neuerGarten(a:Int, b:Int, c:Int)
     }
 }
 
-fun g(): Garten?
+fun aktuellerGarten(): Garten
 {
-    return stuff.garten?.get(stuff.currentGarten)
+    val aktuellerGarten = stuff.garten?.get(stuff.currentGarten)
+    if (aktuellerGarten == null) throw RuntimeException("Kein Aktueller Garten gefunden!")
+    return aktuellerGarten;
 }
 
-fun convertCoords(c:String):Array<Int>?
+fun convertCoords(c:String):Array<Int>
 {
     var a=c.split("x")
     when(a.size){
