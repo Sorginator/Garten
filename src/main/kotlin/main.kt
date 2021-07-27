@@ -164,7 +164,7 @@ fun neuerGarten(a:Int, b:Int, c:Int)
     }
 }
 
-fun aktuellerGarten(): Garten
+fun no(): Garten
 {
     val aktuellerGarten = stuff.garten?.get(stuff.currentGarten)
     if (aktuellerGarten == null) throw RuntimeException("Kein Aktueller Garten gefunden!")
