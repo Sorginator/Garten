@@ -49,10 +49,7 @@ fun parse(e:Expression)
         auspendeln(e)
         return
     }
-    if (e is Expression.nothing) {
-        println("Invalid syntax")
-        return
-    }
+    if (e is Expression.nothing) return
 }
 
 fun düngen(e:Expression.düngen)
@@ -99,7 +96,7 @@ fun auspendeln(e:Expression.auspendeln)
                     if (it.pflanze < 0) it.pflanze = Double.NaN
                 } catch (e:Exception)
                 {
-                    println("sth went wrong")
+                    //println("sth went wrong")
                 }
             }
         }
